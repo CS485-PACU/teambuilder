@@ -32,10 +32,11 @@ typedef struct Person {
 //
 // Returned:    EXIT_SUCCESS
 //***************************************************************************
-int main()
+int main(int argc, char *argv[])
 {
-	std::string cPeopleFilename;
 	std::string cTeamDefFilename;
+	std::string cPeopleFilename;
+	std::string cRandom;
 	std::string cOutFilename;
 	std::vector <Person> cPeople;
 	
@@ -46,14 +47,17 @@ int main()
 	TeamDef sTeamDef;
 	Person sPerson;
 
-	std::cout << "What is the filename of the team definition: ";
-	std::cin >> cTeamDefFilename;
+	if (argc != 5) {
+		std::cerr << "\nUSAGE: " << argv[0] << " teamDef people randomnes output\n\n";
+		return EXIT_FAILURE;
+	}
 
-	std::cout << "What is the filename of the people: ";
-	std::cin >> cPeopleFilename;
+	cTeamDefFilename = argv[1];
+	cPeopleFilename = argv[2];
+	cRandom = argv[3];
+	cOutFilename = argv[4];
+	
 
-	std::cout << "What is the output filename: ";
-	std::cin >> cOutFilename;
 
 	cTeamDefFile.open (cTeamDefFilename);
 
