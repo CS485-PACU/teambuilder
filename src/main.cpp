@@ -14,7 +14,7 @@
 #include <fstream>
 #include <algorithm>  
 
-typedef struct TeamDef { 
+typedef struct TeamDef {
 	size_t mCount;
 	std::vector<std::string> mLabels;
 } TeamDef;
@@ -36,7 +36,7 @@ typedef struct Person {
 // Returned:    LHS < RHS
 //***************************************************************************
 bool sortFName (Person sLHS, Person sRHS) {
-	return ( sLHS.mFname < sRHS.mFname); 
+	return (sLHS.mFname < sRHS.mFname);
 }
 
 //***************************************************************************
@@ -49,8 +49,8 @@ bool sortFName (Person sLHS, Person sRHS) {
 //										
 // Returned:    !(LHS < RHS)
 //***************************************************************************
-bool sortFNameRev(Person sLHS, Person sRHS) {
-	return !(sortFName(sLHS, sRHS));
+bool sortFNameRev (Person sLHS, Person sRHS) {
+	return !(sortFName (sLHS, sRHS));
 }
 
 
@@ -65,14 +65,13 @@ bool sortFNameRev(Person sLHS, Person sRHS) {
 //
 // Returned:    EXIT_SUCCESS
 //***************************************************************************
-int main(int argc, char *argv[])
-{
+int main (int argc, char* argv[]) {
 	std::string cTeamDefFilename;
 	std::string cPeopleFilename;
 	std::string cRandom;
 	std::string cOutFilename;
 	std::vector <Person> cPeople;
-	
+
 	std::ifstream cPeopleFile;
 	std::ifstream cTeamDefFile;
 	std::ofstream cOutFile;
@@ -89,86 +88,84 @@ int main(int argc, char *argv[])
 	cPeopleFilename = argv[2];
 	cRandom = argv[3];
 	cOutFilename = argv[4];
-	
+
 
 
 	cTeamDefFile.open (cTeamDefFilename);
 
-	if (cTeamDefFilename.ends_with(".csv")) {
-		while ( getline(cTeamDefFile, cLine) )
-		{
+	if (cTeamDefFilename.ends_with (".csv")) {
+		while (getline (cTeamDefFile, cLine)) {
 			std::stringstream cStrStream (cLine);
 			std::string cTmp;
 
 			// get int
-			getline(cStrStream, cTmp, ',');
-			sTeamDef.mCount = std::stoi(cTmp);
-			while (getline(cStrStream, cTmp, ',')) {
-				sTeamDef.mLabels.push_back(cTmp);
+			getline (cStrStream, cTmp, ',');
+			sTeamDef.mCount = std::stoi (cTmp);
+			while (getline (cStrStream, cTmp, ',')) {
+				sTeamDef.mLabels.push_back (cTmp);
 			}
 
 		}
-	} else {
+	}
+	else {
 		// .txt
 		// get int
-		getline(cTeamDefFile, cLine);
-		sTeamDef.mCount = std::stoi(cLine);
+		getline (cTeamDefFile, cLine);
+		sTeamDef.mCount = std::stoi (cLine);
 
-		while ( getline(cTeamDefFile, cLine) )
-		{
-			sTeamDef.mLabels.push_back(cLine);
+		while (getline (cTeamDefFile, cLine)) {
+			sTeamDef.mLabels.push_back (cLine);
 		}
 	}
 
 	cPeopleFile.open (cPeopleFilename);
 
-	if (cPeopleFilename.ends_with(".csv")) {
-		while ( getline(cPeopleFile, cLine) )
-		{
+	if (cPeopleFilename.ends_with (".csv")) {
+		while (getline (cPeopleFile, cLine)) {
 			std::stringstream cStrStream (cLine);
 			std::string cTmp;
 
-			while (getline(cStrStream, cTmp, ',')) {
+			while (getline (cStrStream, cTmp, ',')) {
 				sPerson.mFname = cTmp;
-				getline(cStrStream, cTmp, ',');
+				getline (cStrStream, cTmp, ',');
 				sPerson.mLname = cTmp;
-				cPeople.push_back(sPerson);
+				cPeople.push_back (sPerson);
 			}
 		}
-	} else {
+	}
+	else {
 		// .txt
-		while ( getline(cPeopleFile, cLine) )
-		{
+		while (getline (cPeopleFile, cLine)) {
 			sPerson.mFname = cLine;
-			getline(cPeopleFile, cLine);
+			getline (cPeopleFile, cLine);
 			sPerson.mLname = cLine;
-			cPeople.push_back(sPerson);
+			cPeople.push_back (sPerson);
 		}
 	}
 
 
-	std::cout << sTeamDef.mCount << std::endl; 
+	std::cout << sTeamDef.mCount << std::endl;
 	for (auto data : sTeamDef.mLabels) {
 		std::cout << data << std::endl;
 	}
 
-	std::sort (cPeople.begin(), cPeople.end(), sortFName);
+	std::sort (cPeople.begin (), cPeople.end (), sortFName);
 	std::cout << "--------------------\n";
 	for (auto data : cPeople) {
 		std::cout << data.mFname << " " << data.mLname << std::endl;
 	}
 
-	std::sort (cPeople.begin(), cPeople.end(), sortFNameRev);
+	std::sort (cPeople.begin (), cPeople.end (), sortFNameRev);
 	std::cout << "--------------------\n";
 
 	for (auto data : cPeople) {
 		std::cout << data.mFname << " " << data.mLname << std::endl;
 	}
 
-	cPeopleFile.close();
-	cTeamDefFile.close();
+	cPeopleFile.close ();
+	cTeamDefFile.close ();
 
-	std::sort (cPeople.begin(), cPeople.end(), sortFName);
+	std::sort (cPeople.begin (), cPeople.end (), sortFName);
 
-  return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }
