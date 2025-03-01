@@ -12,6 +12,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <algorithm>  
 
 typedef struct TeamDef { 
 	size_t mCount;
@@ -23,12 +24,44 @@ typedef struct Person {
 	std::string mLname;
 } Person;
 
+
+//***************************************************************************
+// Function:    sortFName
+//
+// Description: determine if LHS first name  < RHS first name
+//
+// Parameters:  sLHS - Left hand side Person 
+//							sRHS - Right hand side Person
+//										
+// Returned:    LHS < RHS
+//***************************************************************************
+bool sortFName (Person sLHS, Person sRHS) {
+	return ( sLHS.mFname < sRHS.mFname); 
+}
+
+//***************************************************************************
+// Function:    sortFNameRef
+//
+// Description: determine if ! (LHS first name  < RHS first name)
+//
+// Parameters:  sLHS - Left hand side Person 
+//							sRHS - Right hand side Person
+//										
+// Returned:    !(LHS < RHS)
+//***************************************************************************
+bool sortFNameRev(Person sLHS, Person sRHS) {
+	return !(sortFName(sLHS, sRHS));
+}
+
+
 //***************************************************************************
 // Function:    main
 //
-// Description: Print hi!
+// Description: Driver to build teams!
 //
-// Parameters:  none
+// Parameters:  argc - count of command line args
+//							argv - command line args!
+//											teamDef people randomnes output
 //
 // Returned:    EXIT_SUCCESS
 //***************************************************************************
@@ -119,12 +152,23 @@ int main(int argc, char *argv[])
 		std::cout << data << std::endl;
 	}
 
+	std::sort (cPeople.begin(), cPeople.end(), sortFName);
+	std::cout << "--------------------\n";
+	for (auto data : cPeople) {
+		std::cout << data.mFname << " " << data.mLname << std::endl;
+	}
+
+	std::sort (cPeople.begin(), cPeople.end(), sortFNameRev);
+	std::cout << "--------------------\n";
+
 	for (auto data : cPeople) {
 		std::cout << data.mFname << " " << data.mLname << std::endl;
 	}
 
 	cPeopleFile.close();
 	cTeamDefFile.close();
+
+	std::sort (cPeople.begin(), cPeople.end(), sortFName);
 
   return EXIT_SUCCESS;
 }
