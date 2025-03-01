@@ -1,0 +1,66 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "printToPDF",
+            "type": "shell",
+            "command": "enscript -C -T 2 -p - -M Letter -Ecpp --color -fCourier8 src/*.cpp include/*.h test/*.cpp | ps2pdf - bin/src.pdf",
+            "group": {
+                "kind": "none"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "linux": {
+                "command": "make",
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$msCompile",
+                "$gcc"
+            ]
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "linux": {
+                "command": "make",
+                "args": [
+                    "clean"
+                ]
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$msCompile",
+                "$gcc"
+            ]
+        },
+        {
+            "label": "runMe",
+            "type": "shell",
+            "linux": {
+                "command": "make",
+                "args": [
+                    "runMe"
+                ]
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$msCompile",
+                "$gcc"
+            ]
+        }
+    ]
+}
