@@ -26,7 +26,7 @@ rm v1.15.2.tar.gz;
 * Run unit tests from the command line:
    * At the command line:
    ```
-   export CXX=`which clang++-16`;
+   export CXX=`which clang++`;
    echo $CXX;
    cmake -S . -B ./build;
    cmake --build build --target clean;
@@ -34,7 +34,7 @@ rm v1.15.2.tar.gz;
    ```
    * If you want to enable the debugger for the unit tests use:
    ```
-   export CXX=`which clang++-16 -fstandalone-debug -g`
+   export CXX=`which clang++ -fstandalone-debug -g`
    ```
    * To run the test cases:
    ```
