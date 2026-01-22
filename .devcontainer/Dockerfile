@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/devcontainers/cpp:debian
 
 ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="none"
 # keep CXX here so google test works via the command line
-ENV CXX='/usr/bin/clang++-16 -fstandalone-debug -g'
+ENV CXX='/usr/bin/clang++ -fstandalone-debug -g'
 
 # Optionally install the cmake for vcpkg
 COPY ./reinstall-cmake.sh /tmp/
@@ -18,8 +18,8 @@ RUN if [ "${REINSTALL_CMAKE_VERSION_FROM_SOURCE}" != "none" ]; then \
 
 # [Optional] Uncomment this section to install additional packages.
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends enscript ghostscript poppler-utils clang-16
+    && apt-get -y install --no-install-recommends enscript ghostscript poppler-utils
 # RUN wget http://http.us.debian.org/debian/pool/main/v/valgrind/valgrind_3.20.0-2.1_arm64.deb && sudo apt-get -y install ./valgrind_3.20.0-2.1_arm64.deb 
-RUN wget https://zeus.cs.pacificu.edu/software/valgrind_3.20.0-2.1_amd64.deb && \
- sudo apt-get -y install ./valgrind_3.20.0-2.1_amd64.deb && \
- rm -rf ./valgrind_3.20.0-2.1_amd64.deb
+#RUN wget https://zeus.cs.pacificu.edu/software/valgrind_3.20.0-2.1_amd64.deb && \
+# sudo apt-get -y install ./valgrind_3.20.0-2.1_amd64.deb && \
+# rm -rf ./valgrind_3.20.0-2.1_amd64.deb
