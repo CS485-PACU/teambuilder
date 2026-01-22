@@ -109,7 +109,7 @@
     "miDebuggerPath": "/usr/bin/lldb"
   },
   "cmake.environment": {
-    "CXX": "/usr/bin/clang++-16 -fstandalone-debug -g"
+    "CXX": "/usr/bin/clang++ -fstandalone-debug -g"
   },
 
 }
